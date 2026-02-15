@@ -29,6 +29,7 @@ targets:
         INFOPLIST_KEY_UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         TARGETED_DEVICE_FAMILY: 1
+        CODE_SIGN_ENTITLEMENTS: Said/Said.entitlements
 
       configs:
         Debug:
