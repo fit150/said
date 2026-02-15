@@ -2,4 +2,6 @@ import SwiftUI
 import SaidUI
 
 @main
-extension SaidApp {}
+extension SaidApp {
+    
+}
