@@ -4,7 +4,8 @@ import PackageDescription
 let package = Package(
     name: "said-app",
     platforms: [
-        .iOS(.v26)
+        .iOS(.v26),
+        .macOS(.v26)
     ],
     products: [
         .library(
