@@ -9,13 +9,13 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "SaidUI",
-            targets: ["SaidUI"]
+            name: "SaidApp",
+            targets: ["SaidApp"]
         )
     ],
     targets: [
         .target(
-            name: "SaidUI"
+            name: "SaidApp"
         )
     ]
 )
