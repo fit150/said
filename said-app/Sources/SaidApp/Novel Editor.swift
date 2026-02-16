@@ -10,7 +10,9 @@ struct NovelEditor: View {
                 updateNav
             )
             .toolbar {
-                ToolbarItem
+                ToolbarItem(placement: bottomBar) {
+                    
+                }
             }
     }
 }
