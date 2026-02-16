@@ -1,5 +1,5 @@
 import SwiftUI
-import SaidUI
+import SaidApp
 
 @main
 extension SaidApp {
