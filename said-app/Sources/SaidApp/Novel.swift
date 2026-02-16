@@ -1,4 +1,6 @@
 import Foundation
+import UniformTypeIdentifiers
+import Synchronization
 
 struct Novel {
     var lines = [Line]()
@@ -24,8 +26,6 @@ extension Novel: FileDocument {
         try file()
     }
 }
-
-import Synchronization
 
 private extension Int {
     
