@@ -2,7 +2,9 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 public struct SaidApp: App {
-    public init() {}
+    public init() {
+        
+    }
 
     public var body: some Scene {
         DocumentGroup(newDocument: Novel()) { file in
@@ -18,7 +20,7 @@ extension Novel: FileDocument {
     }
 
     public init(configuration: ReadConfiguration) throws {
-        try init(configuration.file)
+        try self.init(configuration.file)
     }
 
     public func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
