@@ -9,6 +9,9 @@ struct NovelEditor: View {
                 idType: Line.ID.self,
                 updateNav
             )
+            .toolbar {
+                ToolbarItem
+            }
     }
 }
 
