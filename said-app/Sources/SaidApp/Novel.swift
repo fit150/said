@@ -11,6 +11,20 @@ struct Line: Identifiable {
     var content = ""
 }
 
+extension Novel: FileDocument {
+    public static var readableContentTypes: [UTType] {
+        [.plainText]
+    }
+
+    public init(configuration: ReadConfiguration) throws {
+        try self.init(configuration.file)
+    }
+
+    public func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+        try file()
+    }
+}
+
 import Synchronization
 
 private extension Int {
