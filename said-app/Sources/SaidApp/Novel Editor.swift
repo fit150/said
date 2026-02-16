@@ -11,7 +11,10 @@ struct NovelEditor: View {
             )
             .toolbar {
                 ToolbarItem(placement: bottomBar) {
-                    
+                    Button(
+                        "mic", 
+                        systemImage: "mic", 
+                        action: tapMic)
                 }
             }
     }
@@ -19,6 +22,12 @@ struct NovelEditor: View {
 
 extension NovelEditor {
     func updateNav(_ ids: [Line.ID]) {
+        
+    }
+}
+
+extension NovelEditor {
+    func tapMic() {
         
     }
 }
