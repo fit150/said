@@ -49,7 +49,7 @@ extension Novel {
 extension Novel {
     var string: String {
         lines
-            .map {\.content}
+            .map (\.content)
             .joined(separator: "\n")
     }
     
