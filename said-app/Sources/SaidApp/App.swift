@@ -1,5 +1,4 @@
 import SwiftUI
-import UniformTypeIdentifiers
 
 public struct SaidApp: App {
     public init() {
