@@ -11,15 +11,21 @@ struct Line: Identifiable {
     var content = ""
 }
 
+import Synchronization
+
 private extension Int {
-    private static var id = 0
+    
+    private static let lock = Mutex<Int>(0)
     
     static func nextId() -> Int {
-        let next = Self.id
-        Self.id += 1
-        return next
+        lock.withLock {
+            let next = $0
+            $0 += 1
+            return next
+        }
     }
 }
+
 
 extension Novel {
     init(_ string: String = "") {
