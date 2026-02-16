@@ -1,28 +1,27 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 public struct SaidApp: App {
-    public init() {
-        
-    }
+    public init() {}
 
     public var body: some Scene {
-        DocumentGroup(
-            newDocument: Novel()
-        ) {file in 
+        DocumentGroup(newDocument: Novel()) { file in
             NovelEditor(novel: file.$document)
         }
+        DocumentGroupLaunchScene()
+    }
 }
 
 extension Novel: FileDocument {
-    static var readableContentTypes: [UTType] {
+    public static var readableContentTypes: [UTType] {
         [.plainText]
     }
-    
-    init(configuration: ReadConfiguration) throws {
+
+    public init(configuration: ReadConfiguration) throws {
         try init(configuration.file)
     }
-    
-    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+
+    public func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
         try file()
     }
 }
