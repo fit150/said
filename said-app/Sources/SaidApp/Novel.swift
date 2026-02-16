@@ -1,6 +1,7 @@
 import Foundation
 import UniformTypeIdentifiers
 import Synchronization
+import SwiftUI
 
 struct Novel {
     var lines = [Line]()
