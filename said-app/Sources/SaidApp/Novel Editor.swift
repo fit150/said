@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct NovelEditor: View {
-    @State var novel: Novel
+    @Binding var novel: Novel
     
     var body: some View {
         NovelView(novel: novel)
