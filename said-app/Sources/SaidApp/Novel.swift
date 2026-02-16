@@ -5,7 +5,7 @@ struct Novel {
 }
 
 struct Line: Identifiable {
-    typealias ID: Int
+    typealias ID = Int
     
     let id = ID.nextId()
     var content = ""
