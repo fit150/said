@@ -6,14 +6,23 @@ public struct SaidApp: App {
     }
 
     public var body: some Scene {
-        WindowGroup {
-            List {
-                Text("hello world")
-            }
+        DocumentGroup(
+            newDocument: Novel()
+        ) {file in 
+            NovelEditor(novel: file.$document)
         }
-    }
 }
 
 extension Novel: FileDocument {
+    static var readableContentTypes: [UTType] {
+        [.plainText]
+    }
     
+    init(configuration: ReadConfiguration) throws {
+        try init(configuration.file)
+    }
+    
+    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+        try file()
+    }
 }
