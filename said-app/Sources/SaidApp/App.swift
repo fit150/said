@@ -13,3 +13,7 @@ public struct SaidApp: App {
         }
     }
 }
+
+extension Novel: FileDocument {
+    
+}
