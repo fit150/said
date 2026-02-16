@@ -42,7 +42,7 @@ extension Novel {
         guard let data = file.regularFileContents else {
             throw CocoaError(.fileReadCorruptFile)
         }
-        self.init(data)
+        try self.init(data)
     }
 }
 
