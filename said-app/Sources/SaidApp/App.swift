@@ -13,17 +13,3 @@ public struct SaidApp: App {
         DocumentGroupLaunchScene()
     }
 }
-
-extension Novel: FileDocument {
-    public static var readableContentTypes: [UTType] {
-        [.plainText]
-    }
-
-    public init(configuration: ReadConfiguration) throws {
-        try self.init(configuration.file)
-    }
-
-    public func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        try file()
-    }
-}
