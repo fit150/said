@@ -4,28 +4,45 @@ struct NovelEditor: View {
     @State var novel: Novel
     
     var body: some View {
-        NovelView()
+        NovelView(novel: novel)
             .onScrollTargetVisibilityChange(
-                idType: Int.self,
+                idType: Line.ID.self,
                 updateNav
             )
     }
 }
 
 extension NovelEditor {
-    func updateNav(_ ids: [Int]) {
+    func updateNav(_ ids: [Line.ID]) {
         
     }
 }
 
 private struct NovelView: View {
+    var novel: Novel
+    
     var body: some View {
         ScrollView {
             LazyVStack {
-                
+                ForEach(novel.lines) {line in
+                    LineView(line: line)
+                }
             }
             .scrollTargetLayout()
         }
         .defaultScrollAnchor(.bottom)
+    }
+    
+    struct LineView: View {
+        let line: Line
+        
+        var body: some View {
+            Text(line.content)
+                .padding()
+                .frame(
+                    maxWidth: .infinity,
+                    alignment: .leading
+                )
+        }
     }
 }
