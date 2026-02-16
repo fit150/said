@@ -10,7 +10,10 @@ extension Novel {
     }
     
     init(_ data: Data) throws {
-        guard let str = String(data: data, encoding: .utf8) else {
+        guard let str = String(
+            data: data, 
+            encoding: .utf8
+        ) else {
             throw CocoaError(.fileReadInapplicableStringEncoding)
         }
         self.init(str)
@@ -30,7 +33,9 @@ extension Novel {
     }
     
     func data() throws -> Data {
-        guard let data = string.data(using: .utf8) else {
+        guard let data = string.data(
+            using: .utf8
+        ) else {
             throw CocoaError(.fileWriteInapplicableStringEncoding)
         }
         return data
