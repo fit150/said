@@ -47,4 +47,4 @@ targets:
 
     dependencies:
       - package: "said-app"
-        product: SaidUI
+        product: SaidApp
