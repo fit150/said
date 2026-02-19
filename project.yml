@@ -1,0 +1,50 @@
+name: Said
+
+options:
+  bundleIdPrefix: app.fit150
+  fileTypes:
+    "icon":
+      file: true
+
+packages:
+  "said-app":
+    path: ./said-app
+
+targets:
+  Said:
+    type: application
+    platform: iOS
+
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        MARKETING_VERSION: 0.1
+        CURRENT_PROJECT_VERSION: 1
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: false
+        INFOPLIST_KEY_UILaunchScreen_Generation: true
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: need mic
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: need speech recognition
+        INFOPLIST_KEY_UIBackgroundModes:
+          - audio
+        INFOPLIST_KEY_UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        TARGETED_DEVICE_FAMILY: 1
+        CODE_SIGN_ENTITLEMENTS: Said/Said.entitlements
+
+      configs:
+        Debug:
+          CODE_SIGN_STYLE: Automatic
+          DEVELOPMENT_TEAM: ${TEAM_ID}
+
+        Release:
+          CODE_SIGN_STYLE: Manual
+          DEVELOPMENT_TEAM: ${TEAM_ID}
+          CODE_SIGN_IDENTITY: "Apple Distribution"
+          PROVISIONING_PROFILE_SPECIFIER: "match AppStore app.fit150.Said"
+
+    sources:
+      - Said
+
+    dependencies:
+      - package: "said-app"
+        product: SaidApp

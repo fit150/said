@@ -1,0 +1,21 @@
+// swift-tools-version: 6.2
+import PackageDescription
+
+let package = Package(
+    name: "said-app",
+    platforms: [
+        .iOS(.v26),
+        .macOS(.v26)
+    ],
+    products: [
+        .library(
+            name: "SaidApp",
+            targets: ["SaidApp"]
+        )
+    ],
+    targets: [
+        .target(
+            name: "SaidApp"
+        )
+    ]
+)

@@ -1,0 +1,71 @@
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      match_readonly:
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+jobs:
+  build-ios:
+    runs-on: macos-26
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache SwiftPM & DerivedData
+        uses: actions/cache@v4
+        with:
+          path: |
+            .spm
+            build/DerivedData
+            ~/Library/Caches/com.apple.dt.Xcode
+          key: ${{ runner.os }}-spm-dd-${{ hashFiles('**/Package.resolved', 'project.yml', '**/*.xcodeproj/project.pbxproj') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-dd-
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        env:
+          TEAM_ID: ${{ vars.TEAM_ID }}
+        run: xcodegen generate
+
+      - name: Install fastlane
+        run: sudo gem install fastlane -N
+
+      - name: Build and upload (redacted)
+        shell: bash
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          TEAM_ID: ${{ vars.TEAM_ID }}
+
+          ASC_KEY_ID: ${{ vars.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ vars.ASC_ISSUER_ID }}
+          ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
+
+          CERT_REPO_TOKEN: ${{ secrets.CERT_REPO_TOKEN }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+
+          FASTLANE_SKIP_UPDATE_CHECK: "1"
+          FASTLANE_HIDE_CHANGELOG: "1"
+        run: |
+          set -o pipefail
+
+          fastlane ios release match_readonly:${{ inputs.match_readonly }} 2>&1 \
+            | sed -E '
+                s/(Apple (Distribution|Development): ).*( \([A-Z0-9]{10}\))/\1[REDACTED]\3/g;
+                s/(Common Name[[:space:]]*\|).*/\1 [REDACTED]/g;
+                s/(Organisation[[:space:]]*\|).*/\1 [REDACTED]/g;
+                s/(Organisation Unit[[:space:]]*\|).*/\1 [REDACTED]/g;
+                s/(User ID[[:space:]]*\|).*/\1 [REDACTED]/g;
+                s/\b[A-Z0-9]{10}\b/[REDACTED]/g;
+              '
+
+          exit ${PIPESTATUS[0]}
