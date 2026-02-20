@@ -70,8 +70,7 @@ platform :ios do
 
       xcargs: [
         "CURRENT_PROJECT_VERSION=#{next_build_number}",
-        "ENABLE_BITCODE=NO",
-        "-clonedSourcePackagesDirPath .spm"
+        "ENABLE_BITCODE=NO"
       ].join(" ")
     )
 
