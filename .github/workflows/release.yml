@@ -18,12 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache SwiftPM & DerivedData
-        uses: actions/cache@v4
+      - uses: irgaly/xcode-cache@v1
         with:
-          path: |
-            build/DerivedData
-          key: xcode
+        key: xcode-cache-deriveddata-${{ github.workflow }}-${{ github.sha }}
+        restore-keys: xcode-cache-deriveddata-${{ github.workflow }}-
 
       - name: Cache XcodeGen
         uses: actions/cache@v4
