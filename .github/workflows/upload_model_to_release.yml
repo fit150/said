@@ -1,0 +1,35 @@
+name: Upload Model to Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo_id:
+        description: "HF repo id"
+        required: true
+        default: "mlx-community/gemma-3-1b-it-4bit"
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install
+        run: pip install -U "huggingface_hub[cli]"
+
+      - name: Download + Pack
+        run: |
+          SAFE_NAME=$(echo "${{ inputs.repo_id }}" | tr '/' '.')
+          mkdir -p dist/repo
+          hf download "${{ inputs.repo_id }}" --local-dir dist/repo --local-dir-use-symlinks False
+          tar -czf "dist/${SAFE_NAME}.tgz" -C dist repo
+
+      - name: Release + Upload
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG=huggingface
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" -t "$TAG" -n ""
+          SAFE_NAME=$(echo "${{ inputs.repo_id }}" | tr '/' '.')
+          gh release upload "$TAG" "dist/${SAFE_NAME}.tgz" --clobber
