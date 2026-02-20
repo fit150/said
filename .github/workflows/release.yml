@@ -20,8 +20,7 @@ jobs:
 
       - uses: irgaly/xcode-cache@v1
         with:
-        key: xcode-cache-deriveddata-${{ github.workflow }}-${{ github.sha }}
-        restore-keys: xcode-cache-deriveddata-${{ github.workflow }}-
+          key: xcode-deriveddata
 
       - name: Cache XcodeGen
         uses: actions/cache@v4
