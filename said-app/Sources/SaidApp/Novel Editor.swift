@@ -10,7 +10,7 @@ struct NovelEditor: View {
                 updateNav
             )
             .toolbar {
-                ToolbarItem(placement: bottomBar) {
+                ToolbarItem(placement: .bottomBar) {
                     Button(
                         "mic", 
                         systemImage: "mic", 
