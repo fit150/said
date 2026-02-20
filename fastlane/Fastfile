@@ -57,7 +57,7 @@ platform :ios do
       project: "Said.xcodeproj",
       configuration: "Release",
       export_method: "app-store",
-      derived_data_path: "build/DerivedData",
+      #derived_data_path: "build/DerivedData",
       clean: false,
 
       export_options: {
