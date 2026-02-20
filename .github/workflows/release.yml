@@ -25,6 +25,12 @@ jobs:
             build/DerivedData
           key: xcode
 
+      - name: Cache XcodeGen
+        uses: actions/cache@v4
+        with:
+          path: ~/.xcodegen/cache
+          key: ${{ runner.os }}-xcodegen-${{ hashFiles('project.yml') }}
+
       - name: Install XcodeGen
         run: brew install xcodegen
 
