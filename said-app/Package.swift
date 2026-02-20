@@ -13,9 +13,21 @@ let package = Package(
             targets: ["SaidApp"]
         )
     ],
+    dependencies: [
+        .package(
+            url: "https://github.com/ml-explore/mlx-swift-lm.git",
+            branch: "main"
+        )
+    ],
     targets: [
         .target(
-            name: "SaidApp"
+            name: "SaidApp",
+            dependencies: [
+                .product(name: "MLXLLM", package: "mlx-swift-lm")
+            ],
+            resources: [
+                .process("Resources")
+            ]
         )
     ]
 )
