@@ -25,9 +25,8 @@ jobs:
             .spm
             build/DerivedData
             ~/Library/Caches/com.apple.dt.Xcode
-          key: ${{ runner.os }}-spm-dd-${{ hashFiles('**/Package.resolved', 'project.yml', '**/*.xcodeproj/project.pbxproj') }}
-          restore-keys: |
-            ${{ runner.os }}-spm-dd-
+            ~/Library/Caches/org.swift.swiftpm
+          key: ${{ runner.os }}-spm-dd-${{ hashFiles('**/Package.resolved', 'project.yml') }}
 
       - name: Install XcodeGen
         run: brew install xcodegen
