@@ -18,6 +18,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Checkout said-app
+        uses: actions/checkout@v4
+        with:
+          repository: fit150/said-app
+          token: ${{ secrets.SAID_APP_REPO_TOKEN }}
+          path: said-app
+
       - name: Install XcodeGen
         run: brew install xcodegen
 
@@ -29,7 +36,7 @@ jobs:
       - name: Install fastlane
         run: sudo gem install fastlane -N
 
-      - name: Build and upload (redacted)
+      - name: Build and Upload
         shell: bash
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
