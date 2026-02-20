@@ -56,7 +56,7 @@ platform :ios do
       scheme: "Said",
       project: "Said.xcodeproj",
       configuration: "Release",
-      export_method: "app-store"
+      export_method: "app-store",
 
       export_options: {
         signingStyle: "manual",
