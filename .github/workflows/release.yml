@@ -22,11 +22,10 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            .spm
             build/DerivedData
             ~/Library/Caches/com.apple.dt.Xcode
             ~/Library/Caches/org.swift.swiftpm
-          key: ${{ runner.os }}-spm-dd-${{ hashFiles('**/Package.resolved', 'project.yml') }}
+          key: xcode-${{ hashFiles('**/Package.resolved', 'project.yml') }}
 
       - name: Install XcodeGen
         run: brew install xcodegen
