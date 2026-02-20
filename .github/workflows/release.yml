@@ -23,9 +23,7 @@ jobs:
         with:
           path: |
             build/DerivedData
-            ~/Library/Caches/com.apple.dt.Xcode
-            ~/Library/Caches/org.swift.swiftpm
-          key: xcode-${{ hashFiles('**/Package.resolved', 'project.yml') }}
+          key: xcode
 
       - name: Install XcodeGen
         run: brew install xcodegen
