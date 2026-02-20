@@ -56,9 +56,7 @@ platform :ios do
       scheme: "Said",
       project: "Said.xcodeproj",
       configuration: "Release",
-      export_method: "app-store",
-      #derived_data_path: "build/DerivedData",
-      clean: false,
+      export_method: "app-store"
 
       export_options: {
         signingStyle: "manual",
@@ -69,7 +67,7 @@ platform :ios do
       },
 
       xcargs: [
-        "CURRENT_PROJECT_VERSION=#{next_build_number}",
+             "CURRENT_PROJECT_VERSION=#{next_build_number}",
         "ENABLE_BITCODE=NO"
       ].join(" ")
     )
