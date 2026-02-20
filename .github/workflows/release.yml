@@ -18,23 +18,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: irgaly/xcode-cache@v1
-        with:
-          key: xcode-deriveddata
-
-      - name: Cache XcodeGen
-        uses: actions/cache@v4
-        with:
-          path: ~/.xcodegen/cache
-          key: ${{ runner.os }}-xcodegen-${{ hashFiles('project.yml') }}
-
       - name: Install XcodeGen
         run: brew install xcodegen
 
       - name: Generate Xcode project
         env:
           TEAM_ID: ${{ vars.TEAM_ID }}
-        run: xcodegen generate --use-cache
+        run: xcodegen generate
 
       - name: Install fastlane
         run: sudo gem install fastlane -N
@@ -57,14 +47,4 @@ jobs:
         run: |
           set -o pipefail
 
-          fastlane ios release match_readonly:${{ inputs.match_readonly }} 2>&1 \
-            | sed -E '
-                s/(Apple (Distribution|Development): ).*( \([A-Z0-9]{10}\))/\1[REDACTED]\3/g;
-                s/(Common Name[[:space:]]*\|).*/\1 [REDACTED]/g;
-                s/(Organisation[[:space:]]*\|).*/\1 [REDACTED]/g;
-                s/(Organisation Unit[[:space:]]*\|).*/\1 [REDACTED]/g;
-                s/(User ID[[:space:]]*\|).*/\1 [REDACTED]/g;
-                s/\b[A-Z0-9]{10}\b/[REDACTED]/g;
-              '
-
-          exit ${PIPESTATUS[0]}
+          fastlane ios release match_readonly:${{ inputs.match_readonly }}
