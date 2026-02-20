@@ -34,7 +34,7 @@ jobs:
       - name: Generate Xcode project
         env:
           TEAM_ID: ${{ vars.TEAM_ID }}
-        run: xcodegen generate
+        run: xcodegen generate --use-cache
 
       - name: Install fastlane
         run: sudo gem install fastlane -N
